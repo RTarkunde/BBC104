@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %} | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 100px;
+
+  }
+
+  .column2 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px;
+  }
+
+  .
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  p {
+  border: 2px solid powderblue;
+}
+  </style>
+</head>
+
+
+
+<div class="row">
+  <div class="column2" style="background-color:#ccc;border: 2px solid powderblue;">
+    <h5> About Billionbase Camp</h5>
+    <h5> How we can help you to minimize your taxes? </h5>
+  </div>
+  <div class="column2" style="background-color:#ccc;border: 2px solid powderblue;">
+    <textarea name=blog readonly style="width:100%; height:80%;">Blog</textarea>
+    <li><a href="calculator">Check if you are paying 104% tax this FY</a></li>
+  </div>
+
+
+
+</div>
+<h4>Testimonials</h4>
+<div class="w3-container">
+    <div class="row">
+      {% if latest_testimonial_list %}
+        <ul>
+        {% for testimonial in latest_testimonial_list %}
+            <div class="column" style="background-color:#ccc;border: 2px solid powderblue;"> <li><a href="/land/{{ testimonial.id }}/">{{ testimonial.testimonial }}</a></li></div>
+        {% endfor %}
+        </ul>
+        {% else %}
+          <p>No testimonials are available.</p>
+        {% endif %}
+    </div>
+    </div>
+</div>
+    <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Send message</button>
+
+    <!-- Inquiry Modal -->
+      <div class="modal fade" id="inquiryModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="contact-dealer modal-header">
+              <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
+              <center><img src="{% static 'img/logos/logo-black-white.png' %}"></center>
+              <button type="button" class="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+
+                {% if user.is_authenticated %}
+                  <input type="hidden" name="user_id" value="{{user.id}}">
+                {% else %}
+                  <input type="hidden" name="user_id" value="0">
+                {% endif %}
+
+                <input type="hidden" name="car_id" value="{{single_car.id}}">
+                  <div class="form-group">
+                    <label for="name" class="col-form-label">Hello, My Name is</label>
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                        {% if user.is_authenticated %} value="{{user.first_name}}"  {% endif %} required>
+                      </div>
+                      <div class="col">
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                         {% if user.is_authenticated %} value="{{user.last_name}}"  {% endif %} required>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="form-group">
+                        <select class="form-control" id="sel1" name="customer_need">
+                          <option value="I'm interested in this">I'm interested in this</option>
+                          <option value="I'd like to know your best price for this">I'd like to know your best price for this</option>
+                          <option value="I'd like to test drive this">I'd like to test drive this</option>
+                          <option value="I'd like a history report for this">I'd like a history report for this</option>
+                        </select>
+                      </div>
+
+                  <div class="form-group">
+                    <input type="text" name="car_title" class="form-control" value="{{ single_car.car_title }}" readonly>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name" class="col-form-label">I live in</label>
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" name="city" class="form-control" placeholder="City" required>
+                      </div>
+                      <div class="col">
+                        <input type="text" name="state" class="form-control" placeholder="State" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                          <label for="name" class="col-form-label">You can reach me by email at</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email Address"
+                         {% if user.is_authenticated %} value="{{user.email}}"  {% endif %} required>
+                      </div>
+                      <div class="col">
+                          <label for="phone" class="col-form-label">or by phone at</label>
+                        <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message" class="col-form-label">Add comments</label>
+                    <textarea name="message" class="form-control" placeholder="Enter your message here (optional)"></textarea>
+                  </div>
+                  <hr>
+                  <input type="submit" value="Send" class="btn btn-block btn-danger">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</html>
+
+
+{% endblock %}

@@ -80,5 +80,24 @@ def get_name(request):
 
     return render(request, 'pages/name.html', {'form': form})
 
+
+name">
+<input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="email_id">
+<input class="w3-input w3-section w3-border" type="text" placeholder="Contact" required name="contact_no">
+<input class="w3-input w3-section w3-border" type="text" placeholder="Prefered Time " required name="preferred_time">
+<input class="w3-input w3-section w3-border" type="text" placeholder="Country " required name="country">
+<input class="w3-input w3-section w3-border" type="text" placeholder="ZIP code/Pin code" required name="zip_code">
+
 def contact(request):
+    if request.method == 'POST':
+        name       = request.POST['name']
+        email_id   = request.POST['email_id']
+        subject    = request.POST['country']
+        contact_no = request.POST['contact_no']
+        zip_code   = request.POST['zip_code']
+        preferred_time   = request.POST['preferred_time']
+
+
+        ]
+
      return HttpResponse("You're looking at contact.")
