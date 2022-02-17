@@ -1,1 +1,214 @@
-<h2>Hello World</h2>
+{% extends 'base.html' %}
+
+{% block title %} | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<style>
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+buttonCard {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+aCard {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+buttonCard:hover, a:hover {
+  opacity: 0.7;
+}
+
+</style>
+
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+{% load static %}
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <img class="w3-image" src="{% static 'BillionBCLogo.jpg' %}" alt="Architecture" width="70" height="70">
+    {% if company_info_list %}
+      {%for company_info in company_info_list %}
+        <a href="#home" class="w3-bar-item w3-button"><b>{{company_info.first_name}}</b> Basecamp</a>
+      {% endfor %}
+    {%else%}
+      <a href="#home" class="w3-bar-item w3-button"><b>Company Not in database !</b> Basecamp</a>
+    {%endif%}
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#projects" class="w3-bar-item w3-button">Testimonials</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <!-- img class="w3-image" src="{% static 'wework2.jpg' %}" alt="Architecture" width="150" height="80" -->
+  <div class="w3-display-middle w3-margin-top w3-center">
+  <!--  <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>BR</b></span> <span class="w3-hide-small w3-text-light-grey">Architects</span></h1> -->
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="Tax104">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Are you paying 104% tax?</h3>
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16"> <li><a href="calculator">Check if you are paying 104% tax this FY</a></li></h3>
+
+  </div>
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="Testimonials">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Testimonials</h3>
+  </div>
+
+  <div class="w3-row-padding">
+    {% if latest_testimonial_list %}
+      {% for testimonial in latest_testimonial_list %}
+      <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-display-container">
+          <li><a href="/land/{{ testimonial.id }}/">{{ testimonial.testimonial }}</a></li>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+  </div>
+
+
+  <!-- About Section -->
+  <div class="w3-container w3-padding-32" id="about">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+    We are a high growth start-up engaged in helping senior executives, HNIs & NRIs to manage their taxes, and finances wisely. Our services include tax management, investment management, financial advisory, Indian & US tax compliances. We are a team of passionate individuals from diverse backgrounds with specialized skills. We love what we do. No wonder that some of the most iconic CEOs of India Inc. count on us as their advisors.
+    Founded in 2020 by Vaibhav Sankla, Ex Managing Director of H&R Block India.....Linked profile
+    </p>
+  </div>
+
+  <div class="w3-row-padding w3-grayscale w3-border-bottom w3-border-light-grey">
+
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src="{% static 'Vaibhav.jpg' %}" alt="Jane" style="width:100%">
+      <h3>Vaibhav Sankla</h3>
+      <p class="w3-opacity">Founder</p>
+      <p>Founded Billion Basecamp in 2020. Former Managing Director H&R Block India Ltd.</p>
+      <p>Avid Himalayan Trekker and personal CFO to many CEOs</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">Testimonials
+      <img = src="{% static 'bbc104/wework2.jpg' %}" alt="Mike" style="width:100%">
+      <h3>Mike Ross</h3>
+      <p class="w3-opacity">Architect</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src = "{% static 'bbc104/wework2.jpg' %}" alt="Dan" style="width:100%">
+      <h3>Dan Star</h3>
+      <p class="w3-opacity">Architect</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-32 w3-border-bottom w3-border-light-grey"  id="contact">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Your Contact</h3>
+    <p>Lets get in touch for a no obligation call from consultant</p>
+    <form action="{% url 'contact' %}" method="POST">
+      {% csrf_token %}
+      <input class="w3-input w3-border" type="text" placeholder="Name" required name="name">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="email_id">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Contact" required name="contact_no">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Prefered Time " required name="preferred_time">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Country " required name="country">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="ZIP code/Pin code" required name="zip_code">
+      <button class="w3-button w3-black w3-section" type="submit">
+        <i class="fa fa-paper-plane"></i> Request a Callback
+      </button>
+    </form>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-32" id="Meet us">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact Us</h3>
+    <h4>Alternately you can also swing by for a cup of coffee</h4>
+    <br>
+
+    <div class="w3-row-padding w3-grayscale">
+      <div class="w3-col l3 m6 w3-margin-bottom w3-margin-right">
+          <h3>Billion Basecamp</h3>
+          <p class="w3-opacity">Wework Futura </p>
+          <p>Magarpatta Road Pune</p>
+          <p>Kirtane Baugh, Pune 411 028</p>
+          <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+      </div>
+
+      <div class="w3-col l3 m6 w3-margin-bottom w3-margin-right">
+          <img src="{% static 'wework2.jpg' %}" class="img-rounded" alt="Cinque Terre" width="100%" >
+      </div>
+
+      <div class="w3-col l3 m6 w3-margin-bottom w3-margin-right">
+          <img src="{% static 'googlemap.jpg' %}" class="img-rounded" alt="Cinque Terre" width="100%">
+      </div>
+    </div>
+
+<!-- Image of location/map
+<div class="w3-container">
+  <img src="/w3images/map.jpg" class="w3-image" style="width:100%">
+</div>
+-->
+<div class="w3-container w3-padding-32" id="Tax104">
+  <h5 class="w3-border-bottom w3-border-light-grey w3-padding-16">@2022 Billion Financial Advisor Private Limted</h5>
+</div>
+
+<!-- End page content -->
+</div>
+
+<!-- Project Section -->
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+</body>
+</html>
+
+
+{% endblock %}
