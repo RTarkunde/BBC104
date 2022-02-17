@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %} | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+{% load humanize %}
+{% load indian_numbers_tags %}
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+  <script>
+  function myFunction() {
+    var x= document.getElementById("salary_income").value;
+    document.getElementById("salary_income").innerHTML = x
+/* <label class = "w3-label" id="salaryInWords"> --> */
+
+  }
+  </script>
+
+  {% load static %}
+
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <img class="w3-image" src="{% static 'BillionBCLogo.jpg' %}" alt="Architecture" width="70" height="70">
+      {% if company_info_list %}
+        {%for company_info in company_info_list %}
+          <a href="#home" class="w3-bar-item w3-button"><b>{{company_info.first_name}}</b> Basecamp</a>
+        {% endfor %}
+      {%else%}
+        <a href="#home" class="w3-bar-item w3-button"><b>Company Not in database !</b> Basecamp</a>
+      {%endif%}
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="" class="w3-bar-item w3-button">Home</a>
+        <a href="#about" class="w3-bar-item w3-button">About</a>
+        <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Contact Section -->
+    <div class="w3-container w3-padding-32" id="contact">
+      <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Generate Report</h3>
+
+      <form action="{% url 'contact' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p><b>Enter your estimated Income details for FY2021-22</b></p>
+        <input class="w3-input w3-section w3-border" type="text" onfocusout="myFunction()" id="salary_income" placeholder="Salary Income(Including RSU)" required name="salary_income">
+        <input class="w3-input w3-section w3-border" type="text" id="rental_income" placeholder="Rental Income" required name="rental_income">
+        <input class="w3-input w3-section w3-border" type="text" id="interest_income" placeholder="Interest Income" required name="interest_income">
+        <input class="w3-input w3-section w3-border" type="text" id="capital_gains" placeholder="Capital Gains" required name="capital_gains">
+        <input class="w3-input w3-section w3-border" type="text" id="contact_no" placeholder="Contact No" required name="contact_no">
+        <input class="w3-input w3-section w3-border" type="text" id="other_income" placeholder="Others(Dividend etc.)" required name="other_income">
+
+        <input class="w3-input w3-section w3-border" type="text" id="name" placeholder="Name*" required name="name">
+        <input class="w3-input w3-section w3-border" type="text" id="organization" placeholder="Current Organization" required name="organization">
+        <input class="w3-input w3-section w3-border" type="text" id="email_id" placeholder="Email ID*" required name="other_income">
+        <input class="w3-input w3-section w3-border" type="text" id="contact_no" placeholder="Contact No.*" required name="contact_no">
+
+        <button type="submit">Send Report</button>
+
+      </form>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

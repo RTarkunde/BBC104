@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 100px;
+
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  </style>
+</head>
+
+<body>
+
+  div class="row">
+    <div class="column2" style="background-color:#ccc;border: 2px solid powderblue;">
+    </div>
+
+    <div class="column2" style="background-color:#ccc;border: 2px solid powderblue;">
+        <form action="action="{% url 'polls:vote' 64564645645645645645645646%}" method="post">
+          <label for="emailid">EmailID:</label><br>
+          <input type="text" id="femailid" name="femailid" value="John"><br>
+
+          <label for="contact">Contact:</label><br>
+          <input type="text" id="fcontactno" name="fcontactno" value="SpaceX"><br><br>
+
+          <input type="button" onclick="call_counter('http://www.google.com', 12345);" value="Send me 104% Report">
+    </div>
+
+    <div class="column2" style="background-color:#ccc;border: 2px solid powderblue;">
+    </div>
+
+        </form>
+</body>
+</html>
+
+{% endblock %}
